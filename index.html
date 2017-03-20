@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Colin Stone HW7: Train Scheduling!</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Bootstrap Theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	 <!-- Javascript for Modals -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+
+</head>
+<body>
+	<div class='container'>
+
+		<!-- Jumbotron for Train Scheduler -->
+		<div class='row'>
+			<div class='jumbotron'>
+				<h1 class='text-center'>Train Scheduling</h1>
+				<h3 class='text-center'>Commute in style and relax!</h3>
+			</div>
+		</div>
+		
+
+		<!-- Submittal box for adding new trains based on various inputs -->
+		<div class='row'>
+			<div class='panel panel-primary'>
+				<div class='panel-heading'>
+					<h4>Add Train</h4>
+				</div>
+				<div class='panel-body'>
+					<label>Name of Train</label>
+					<input type='text' class='form-control' id='trainNameInput' />
+				<br />					
+					<label>Final Destination</label>
+					<input type='text' class='form-control' id='destinationInput' />
+				<br />					
+					<label>First Train Time (Use military time, HH:mm!)</label>
+					<input type='text' class='form-control' id='firstTrainTimeInput' />
+				<br />					
+					<label>Departure Frequency (min)</label>
+					<input type='text' class='form-control' id='frequencyInput' />
+				<br />
+					<!-- Submit button that pushes data to Firebase -->
+					<button class='btn btn-primary' id='submit'>Submit</button>
+				</div>
+			</div>	
+		</div>
+
+
+		<!-- Container where all new and added trains are placed -->
+		<div class='row'>	
+			<div class='panel panel-primary'>
+				<div class='panel-heading'>
+					<h4>Current Train Schedule</h4>
+				</div>
+				<div class='panel-body'>
+					<table class='table'>
+						<thead>
+							<tr>
+								<th class='col-xs-3'>Name of Train</th>
+								<th class='col-xs-2'>Final Destination</th>
+								<th class='col-xs-2'>Departure Frequency (min)</th>
+								<th class='col-xs-2'>Next Arrival</th>
+								<th class='col-xs-2'>Minutes Away from Station</th>
+								<th class='col-xs-1'>Remove Train</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--<tr>
+								<td>Test Train Name</td>
+								<td>Test Destination</td>
+								<td>Test Frequency (min)</td>
+								<td>Test Next Arrival</td>
+								<td>Test Minutes Away</td>
+							</tr>-->
+						</tbody>
+					</table>
+					<button class='btn btn-danger' id='reset'>Reset Schedule/Clear Train Database</button>									
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Modals -->
+<div id="failModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Input Failure</h4>
+      </div>
+      <div class="modal-body">
+        <p>Empty Required Field! Make sure you have populated the Name, Final Destination, First Train Time, and Departure Frequency.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="successModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Input Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p>New train has been added successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+	<script type="text/javascript" src="assets/javascript/moment.js" ></script>
+	<script type="text/javascript" src="assets/javascript/app.js" ></script>
+</body>
+</html>
